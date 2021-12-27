@@ -1,10 +1,11 @@
-import { Field, InputType } from "@nestjs/graphql";
+import {Field, InputType} from "@nestjs/graphql";
 
 @InputType()
 export class SurveyCreateDTO {
-    
-    @Field()
+
+    @Field(() => String)
     name: string;
-    @Field({ nullable: true })
-    questions: string;
+
+    @Field(() => [String])
+    questions: string[];
 }

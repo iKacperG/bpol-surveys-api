@@ -1,8 +1,6 @@
-import {Resolver, Query, Args, Int, Mutation} from '@nestjs/graphql';
+import {Resolver, Query, Args, Mutation} from '@nestjs/graphql';
 import { QuestionsService } from './questions.service';
 import { Question } from './entities/question.entity';
-import {Survey} from "../survey/entities/survey.entity";
-import {SurveyCreateDTO} from "../survey/dto/create-survey.input";
 
 @Resolver(() => Question)
 export class QuestionsResolver {
@@ -12,10 +10,15 @@ export class QuestionsResolver {
   @Query(() => [Question], { name: 'questions' })
   findAll() {
     return this.questionsService.getAllQuestions();
+  }  
+  
+  @Query(() => [Question], { name: 'findMatching' })
+  findMatching(@Args('id') id:string,) {
+    return this.questionsService.findMatching(id);
   }
 
   @Query(() => Question, { name: 'question' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.questionsService.findOne(id);
   }
 

@@ -8,9 +8,14 @@ export class SurveyResolver {
     constructor( private surveyService: SurveyService) {
 
     }
-    @Query(() => [Survey], { name: 'getSurvey'})
-    getSingle() {
-        this.surveyService.getSurvey();
+    @Query(() => Survey, { name: 'getSurvey'})
+    getSingle(@Args('id') id:string) {
+        return this.surveyService.getSurvey(id);
+    } 
+    
+    @Query(() => [Survey], { name: 'getAllSurveys'})
+    findAll() {
+        return this.surveyService.getAllSurveys();
     }
     
     @Mutation(() => Survey, { name: 'createSurvey'})

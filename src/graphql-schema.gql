@@ -2,21 +2,48 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Answer {
+  id: String!
+  text: String!
+  question: Question!
+}
+
+type Question {
+  id: String!
+  text: String!
+  survey: Survey!
+  answers: [Answer!]!
+}
+
 type Survey {
   id: String!
+  url: String!
   name: String!
-  questions: String
+  questions: [Question!]!
 }
 
 type Query {
-  getSurvey: [Survey!]!
+  getSurvey(id: String!): Survey!
+  getAllSurveys: [Survey!]!
+  questions: [Question!]!
+  findMatching(id: String!): [Question!]!
+  question(id: String!): Question!
+  answers: [Answer!]!
+  answer(id: Int!): Answer!
 }
 
 type Mutation {
   createSurvey(surveyInput: SurveyCreateDTO!): Survey!
+  createQuestion(surveyId: String!, text: String!): Question!
+  addAnswers(answerInput: AnswersAddDTO!): [Answer!]!
 }
 
 input SurveyCreateDTO {
   name: String!
-  questions: String
+  questions: [String!]!
+}
+
+input AnswersAddDTO {
+  name: String!
+  userAnswers: [String!]!
 }
