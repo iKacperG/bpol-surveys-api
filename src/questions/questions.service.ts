@@ -16,8 +16,12 @@ export class QuestionsService {
     return this.questionsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} question`;
+  findOne(id: string) {
+    return this.questionsRepository.findOne(id);
+  }  
+  
+  findMatching(id: string) {
+    return this.questionsRepository.find({where: {survey: {id: id}}});
   }
 
   async createQuestion(text: string, surveyId: string): Promise<Question> {

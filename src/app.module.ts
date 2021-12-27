@@ -4,9 +4,13 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { GraphQLModule } from "@nestjs/graphql";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Connection } from "typeorm";
 import { SurveyModule } from './survey/survey.module';
 import { Survey } from "./survey/entities/survey.entity";
+import { QuestionsModule } from './questions/questions.module';
+import {Question} from "./questions/entities/question.entity";
+import {UrlGeneratorModule} from "nestjs-url-generator";
+import {Answer} from "./answers/entities/answer.entity";
+import {AnswersModule} from "./answers/answers.module";
 
 @Module({
   imports: [
@@ -21,14 +25,17 @@ import { Survey } from "./survey/entities/survey.entity";
       "username": "root",
       "password": "very_strong_password",
       "database": "mysql",
-      "entities": [Survey],
+      "entities": [Survey, Question, Answer],
       "synchronize": true,
     }),
     SurveyModule,
+    QuestionsModule,
+    AnswersModule,
+    UrlGeneratorModule.forRoot({
+      appUrl: 'https://localhost:3000',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor(private connection: Connection) {}
-}
+export class AppModule {}
