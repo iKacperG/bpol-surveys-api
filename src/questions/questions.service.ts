@@ -17,7 +17,7 @@ export class QuestionsService {
   }
 
   findOne(id: string) {
-    return this.questionsRepository.findOne(id);
+    return this.questionsRepository.findOne({where: {id: id}});
   }  
   
   findMatching(id: string) {

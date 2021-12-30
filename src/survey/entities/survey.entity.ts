@@ -17,7 +17,7 @@ export class Survey {
     @Column()
     name: string;
     
-    @OneToMany(() => Question, question => question.survey, { cascade: true })
+    @OneToMany(() => Question, (question: Question) => question.survey, { cascade: true })
     @Field(() => [Question])
     questions: Question[];
 }
