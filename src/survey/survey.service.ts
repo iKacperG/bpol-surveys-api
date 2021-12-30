@@ -31,7 +31,7 @@ export class SurveyService {
         
         survey.url = String(new URL(`/${generatedSurvey.id}`, 'http://localhost:3001'));
             
-        surveyData.questions.forEach(( text ) => {
+        surveyData.questions.forEach(( text: string ) => {
             let question = new Question();
             question.text = text;
             survey.questions.push(question);

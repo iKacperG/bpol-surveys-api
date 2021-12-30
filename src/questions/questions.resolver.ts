@@ -12,7 +12,7 @@ export class QuestionsResolver {
     return this.questionsService.getAllQuestions();
   }  
   
-  @Query(() => [Question], { name: 'findMatching' })
+  @Query(() => [Question], { name: 'findQuestions' })
   findMatching(@Args('id') id:string,) {
     return this.questionsService.findMatching(id);
   }

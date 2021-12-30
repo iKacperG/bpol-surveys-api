@@ -4,7 +4,7 @@
 
 type Answer {
   id: String!
-  text: String!
+  input: String!
   question: Question!
 }
 
@@ -26,10 +26,11 @@ type Query {
   getSurvey(id: String!): Survey!
   getAllSurveys: [Survey!]!
   questions: [Question!]!
-  findMatching(id: String!): [Question!]!
+  findQuestions(id: String!): [Question!]!
   question(id: String!): Question!
   answers: [Answer!]!
   answer(id: Int!): Answer!
+  findAnswers(id: String!): [Answer!]!
 }
 
 type Mutation {
@@ -44,6 +45,10 @@ input SurveyCreateDTO {
 }
 
 input AnswersAddDTO {
-  name: String!
-  userAnswers: [String!]!
+  userAnswers: [UserAnswer!]!
+}
+
+input UserAnswer {
+  input: String!
+  questionId: String!
 }
