@@ -21,23 +21,29 @@ export class AnswersService {
     return `This action returns a #${id} question`;
   }
 
-  findMatching(id: string) {
+  findById(id: string) {
     return this.answersRepository.find({where: {question: {id: id}}});
+  } 
+  
+  async getAverage(id: string) {
+    const answersFromScale = await this.answersRepository.find({where: {question: {id: id, inputType: 'scale'}}});
+    let accumulator = 0;
+    answersFromScale.forEach((answer) => {
+      accumulator += Number(answer.input)
+    })
+    return {average: accumulator / answersFromScale.length}
   }
   
-  async addAnswers(answersAddDTO: AnswersAddDTO): Promise<Answer[]> {
-    const answersArray: Answer[] = [];
+  async addAnswers(answersAddDTO: AnswersAddDTO): Promise<{response: string}> {
     
      answersAddDTO.userAnswers.map(async (answerData: UserAnswer) => {
-       const savedAnswer = await this.answersRepository.save({
+       await this.answersRepository.save({
          input: answerData.input,
          question: {
-           id: answerData.questionId
-         }
+           id: answerData.questionId,
+         },
        })
-       answersArray.push(savedAnswer)
     })
-    
-    return answersArray
+    return { response: 'OK' }
   }
 }

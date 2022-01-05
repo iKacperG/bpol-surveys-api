@@ -3,6 +3,13 @@ import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "type
 import {Survey} from "../../survey/entities/survey.entity";
 import {Answer} from "../../answers/entities/answer.entity";
 
+@ObjectType()
+export class QuestionInformation {
+
+    @Field()
+    average: Number;
+}
+
 @Entity("Question")
 @ObjectType()
 export class Question {
@@ -13,6 +20,14 @@ export class Question {
   @Field(() => String)
   @Column()
   text: string;
+  
+ @Field(() => String)
+  @Column({nullable: true})
+  inputType: string;
+ 
+ @Field(() => Number)
+  @Column({nullable: true})
+  average: number;
 
   @ManyToOne(() => Survey, (survey: Survey) => survey.questions)
   @Field(() => Survey)
