@@ -1,8 +1,8 @@
-import {Resolver, Query, Args, Int, Mutation} from '@nestjs/graphql';
+import {Resolver, Query, Args, Mutation} from '@nestjs/graphql';
 import { AnswersService } from './answers.service';
 import {Answer, AnswerResponse} from "./entities/answer.entity";
 import {AnswersAddDTO} from "./dto/add-answers.input";
-import {QuestionInformation} from "../questions/entities/question.entity";
+import {QuestionInformations} from "../questions/entities/question.entity";
 
 @Resolver(() => Answer)
 export class AnswersResolver {
@@ -14,17 +14,12 @@ export class AnswersResolver {
     return this.answersService.getAllAnswers();
   }
 
-  @Query(() => Answer, { name: 'answer' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.answersService.findOne(id);
-  }
-
   @Query(() => [Answer], { name: 'findAnswers' })
   findMatching(@Args('id') id:string,) {
     return this.answersService.findById(id);
   }  
   
-  @Query(() => QuestionInformation, { name: 'getAverage' })
+  @Query(() => QuestionInformations, { name: 'getAverage' })
   getAverage(@Args('id') id:string,) {
     return this.answersService.getAverage(id);
   }

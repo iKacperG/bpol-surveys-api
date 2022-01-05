@@ -4,7 +4,7 @@ import {Survey} from "../../survey/entities/survey.entity";
 import {Answer} from "../../answers/entities/answer.entity";
 
 @ObjectType()
-export class QuestionInformation {
+export class QuestionInformations {
 
     @Field()
     average: Number;

@@ -20,7 +20,7 @@ export class SurveyResolver {
     
     @Mutation(() => Survey, { name: 'createSurvey'})
     create(@Args('surveyInput') survey:SurveyCreateDTO) {
-       return this.surveyService.createSurvey(survey)
+       return this.surveyService.createSurvey(survey);
     }
 
 }

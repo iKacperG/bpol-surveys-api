@@ -16,12 +16,20 @@ export class QuestionsService {
     return this.questionsRepository.find();
   }
 
-  findOne(id: string) {
-    return this.questionsRepository.findOne({where: {id: id}});
+  findById(id: string) {
+    return this.questionsRepository.findOne({
+      where: {
+        id: id
+      }
+    });
   }  
   
-  findMatching(id: string) {
-    return this.questionsRepository.find({where: {survey: {id: id}}});
+  findBySurveyId(id: string) {
+    return this.questionsRepository.find({
+      where: {
+        survey: {
+          id: id}
+      }});
   }
 
   async createQuestion(text: string, surveyId: string): Promise<Question> {
