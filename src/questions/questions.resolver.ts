@@ -14,12 +14,7 @@ export class QuestionsResolver {
   
   @Query(() => [Question], { name: 'findQuestions' })
   findMatching(@Args('id') id:string,) {
-    return this.questionsService.findMatching(id);
-  }
-
-  @Query(() => Question, { name: 'question' })
-  findOne(@Args('id', { type: () => String }) id: string) {
-    return this.questionsService.findOne(id);
+    return this.questionsService.findBySurveyId(id);
   }
 
   @Mutation(() => Question, { name: 'createQuestion'})

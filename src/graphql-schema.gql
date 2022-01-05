@@ -12,7 +12,7 @@ type Answer {
   question: Question!
 }
 
-type QuestionInformation {
+type QuestionInformations {
   average: Float!
 }
 
@@ -37,11 +37,9 @@ type Query {
   getAllSurveys: [Survey!]!
   questions: [Question!]!
   findQuestions(id: String!): [Question!]!
-  question(id: String!): Question!
   answers: [Answer!]!
-  answer(id: Int!): Answer!
   findAnswers(id: String!): [Answer!]!
-  getAverage(id: String!): QuestionInformation!
+  getAverage(id: String!): QuestionInformations!
 }
 
 type Mutation {

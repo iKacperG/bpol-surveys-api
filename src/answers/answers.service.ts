@@ -17,33 +17,43 @@ export class AnswersService {
     return this.answersRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} question`;
-  }
-
   findById(id: string) {
     return this.answersRepository.find({where: {question: {id: id}}});
   } 
   
   async getAverage(id: string) {
-    const answersFromScale = await this.answersRepository.find({where: {question: {id: id, inputType: 'scale'}}});
-    let accumulator = 0;
+    const answersFromScale = await this.answersRepository
+        .find({
+          where: {
+            question: {
+              id: id,
+              inputType: 'scale'}
+          }
+        });
+    let scaleAccumulator = 0;
     answersFromScale.forEach((answer) => {
-      accumulator += Number(answer.input)
+      scaleAccumulator += Number(answer.input)
     })
-    return {average: accumulator / answersFromScale.length}
-  }
-  
-  async addAnswers(answersAddDTO: AnswersAddDTO): Promise<{response: string}> {
     
-     answersAddDTO.userAnswers.map(async (answerData: UserAnswer) => {
-       await this.answersRepository.save({
-         input: answerData.input,
-         question: {
-           id: answerData.questionId,
-         },
-       })
-    })
-    return { response: 'OK' }
+    return {
+      average: scaleAccumulator / answersFromScale.length
+    }
+  }
+
+  async addAnswers(answersAddDTO: AnswersAddDTO): Promise<{ response: string }> {
+
+    answersAddDTO.userAnswers
+        .map((answer: UserAnswer) => {
+          this.answersRepository.save({
+            input: answer.input,
+            question: {
+              id: answer.questionId,
+            },
+          });
+        });
+    
+    return {
+      response: 'OK',
+    }
   }
 }

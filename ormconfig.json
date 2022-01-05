@@ -5,7 +5,15 @@
   "username": "root",
   "password": "very_strong_password",
   "database": "mysql",
-  "entities": ["src/**/*.entity.ts"],
   "synchronize": true,
-  "migrations": ["src/migrations/*.ts"]
+  "entities": [
+    "dist/**/*.entity.js"
+  ],
+  "migrations": [
+    "src/migrations/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "src/entity",
+    "migrationsDir": "dist/migrations"
+  }
 }

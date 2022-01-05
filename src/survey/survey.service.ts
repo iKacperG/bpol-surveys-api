@@ -9,7 +9,7 @@ import {Question} from "../questions/entities/question.entity";
 export class SurveyService {
     constructor(
         @InjectRepository(Survey) private surveyRepository: Repository<Survey>,
-        @InjectRepository(Question) private questionRepository: Repository<Question>
+        @InjectRepository(Question) private questionRepository: Repository<Question>,
     ) {
 
     }
@@ -23,21 +23,22 @@ export class SurveyService {
     
     async createSurvey(surveyData: SurveyCreateDTO): Promise<Survey> {
         
-        const survey = new Survey();
-        survey.name = surveyData.name;
-        survey.questions = [];
-        survey.url = "";
-        const generatedSurvey = await this.surveyRepository.save(survey);
+        const generatedSurvey = await this.surveyRepository.save({
+            name: surveyData.name,
+            questions: [],
+            url: "",
+        });
         
-        survey.url = String(new URL(`/${generatedSurvey.id}`, 'http://localhost:3001'));
+        generatedSurvey.url = String(new URL(`/${generatedSurvey.id}`, 'http://localhost:3001'));
             
         surveyData.questions.forEach(( userQuestion: UserQuestion ) => {
             let question = new Question();
             question.text = userQuestion.text;
-            question.inputType = userQuestion.inputType
-            survey.questions.push(question);
+            question.inputType = userQuestion.inputType;
+            generatedSurvey.questions.push(question);
         })
-        return this.surveyRepository.save(survey);
+        
+        return this.surveyRepository.save(generatedSurvey);
     }
 }
 

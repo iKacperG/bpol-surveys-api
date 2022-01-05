@@ -15,7 +15,7 @@ export class Answer {
   @Field(() => String)
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  
+
   @Field(() => String)
   @Column()
   input: string;
