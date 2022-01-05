@@ -2,6 +2,13 @@ import {Field, ObjectType} from '@nestjs/graphql';
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Question} from "../../questions/entities/question.entity";
 
+@ObjectType()
+export class AnswerResponse {
+
+  @Field()
+  response: string;
+}
+
 @Entity("Answer")
 @ObjectType()
 export class Answer {

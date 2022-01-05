@@ -2,15 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AnswerResponse {
+  response: String!
+}
+
 type Answer {
   id: String!
   input: String!
   question: Question!
 }
 
+type QuestionInformation {
+  average: Float!
+}
+
 type Question {
   id: String!
   text: String!
+  inputType: String!
+  average: Float!
   survey: Survey!
   answers: [Answer!]!
 }
@@ -31,17 +41,23 @@ type Query {
   answers: [Answer!]!
   answer(id: Int!): Answer!
   findAnswers(id: String!): [Answer!]!
+  getAverage(id: String!): QuestionInformation!
 }
 
 type Mutation {
   createSurvey(surveyInput: SurveyCreateDTO!): Survey!
   createQuestion(surveyId: String!, text: String!): Question!
-  addAnswers(answerInput: AnswersAddDTO!): [Answer!]!
+  addAnswers(answerInput: AnswersAddDTO!): AnswerResponse!
 }
 
 input SurveyCreateDTO {
   name: String!
-  questions: [String!]!
+  questions: [UserQuestion!]!
+}
+
+input UserQuestion {
+  text: String!
+  inputType: String
 }
 
 input AnswersAddDTO {

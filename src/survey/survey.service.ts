@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Survey } from "./entities/survey.entity";
-import {SurveyCreateDTO} from "./dto/create-survey.input";
+import {SurveyCreateDTO, UserQuestion} from "./dto/create-survey.input";
 import {Question} from "../questions/entities/question.entity";
 
 @Injectable()
@@ -31,9 +31,10 @@ export class SurveyService {
         
         survey.url = String(new URL(`/${generatedSurvey.id}`, 'http://localhost:3001'));
             
-        surveyData.questions.forEach(( text: string ) => {
+        surveyData.questions.forEach(( userQuestion: UserQuestion ) => {
             let question = new Question();
-            question.text = text;
+            question.text = userQuestion.text;
+            question.inputType = userQuestion.inputType
             survey.questions.push(question);
         })
         return this.surveyRepository.save(survey);
