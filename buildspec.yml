@@ -11,10 +11,11 @@ phases:
   pre_build:
     commands:
       - echo Installing source NPM dependencies...
-      - npm install
       - npm install unit.js
   build:
     commands:
+      - npm install
+      - npm run start:prod
       - echo Build started on `date`
       - echo Compiling the Node.js code
       - npm run build
