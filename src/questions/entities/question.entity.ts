@@ -3,13 +3,6 @@ import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "type
 import {Survey} from "../../survey/entities/survey.entity";
 import {Answer} from "../../answers/entities/answer.entity";
 
-@ObjectType()
-export class QuestionInformations {
-
-    @Field()
-    average: Number;
-}
-
 @Entity("Question")
 @ObjectType()
 export class Question {
