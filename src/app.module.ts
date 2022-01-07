@@ -8,6 +8,7 @@ import { SurveyModule } from './survey/survey.module';
 import { QuestionsModule } from './questions/questions.module';
 import {UrlGeneratorModule} from "nestjs-url-generator";
 import {AnswersModule} from "./answers/answers.module";
+
 @Module({
   imports: [
     SurveyModule,
@@ -19,7 +20,7 @@ import {AnswersModule} from "./answers/answers.module";
     QuestionsModule,
     AnswersModule,
     UrlGeneratorModule.forRoot({
-      appUrl: 'https://localhost:3000',
+      appUrl: "https://localhost:3000",
     }),
   ],
   controllers: [AppController],

@@ -2,18 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AnswerResponse {
-  response: String!
-}
-
 type Answer {
   id: String!
   input: String!
   question: Question!
-}
-
-type QuestionInformations {
-  average: Float!
 }
 
 type Question {
@@ -30,6 +22,14 @@ type Survey {
   url: String!
   name: String!
   questions: [Question!]!
+}
+
+type QuestionInformations {
+  average: Float!
+}
+
+type AnswerResponse {
+  response: String!
 }
 
 type Query {

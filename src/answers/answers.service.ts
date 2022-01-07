@@ -3,7 +3,8 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {Answer} from "./entities/answer.entity";
 import {Question} from "../questions/entities/question.entity";
-import {AnswersAddDTO, UserAnswer} from "./dto/add-answers.input";
+import {AnswersAddDTO} from "./dto/add-answers.input";
+import {UserAnswer} from "../types/userAnswer.type";
 
 @Injectable()
 export class AnswersService {
